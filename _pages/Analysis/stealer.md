@@ -1,16 +1,12 @@
 ---
-# Front Matter - Metapodaci o postu
-# Popunite ove vrednosti za svaki post.
-# Vrednosti su objašnjene u 'posting guide.md'.
-
-title: "Naziv Analize: Dubinska Analiza [Ime Malvera]"
+title: "Lumma stealer analysis"
 date: "2025-08-27"
 tags:
     - [GlavnaKategorija]
     - [Tehnika1]
     - [Platforma]
 thumbnail: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.inceptionnet.com%2Fwp-content%2Fuploads%2F2021%2F04%2Fmalware-threats-1200x900.jpeg&f=1&nofb=1&ipt=697ea0455481591af81151ed0d8e5574af052d913b0e160c2ecec90a74250f04"
-bookmark: true # Postavite na 'true' da bi se post pojavio u navigaciji sa strane
+bookmark: true
 
 ---
 
@@ -23,10 +19,10 @@ bookmark: true # Postavite na 'true' da bi se post pojavio u navigaciji sa stran
 
 | Atribut | Vrednost |
 |---|---|
-| **MD5** | `[MD5 heš vrednost]` |
-| **SHA-256** | `[SHA-256 heš vrednost]` |
-| **Tip Fajla** | `[npr. PE32, ELF, .NET Assembly]` |
-| **Veličina** | `[npr. 256 KB]` |
+| **MD5** | `f6acebcf68b19d0dd167420c49914811` |
+| **SHA-256** | `30aaf493758998d58bd9ec2b9c0e40b19a259963f777da91afe60f859f4327a3` |
+| **Tip Fajla** | `exe` |
+| **Veličina** | `2'232'968 bytes` |
 
 ---
 
