@@ -6,7 +6,7 @@ tags:
     - [HTB]
     - [Blue Team]
     - [CDSA]
-thumbnail: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.shyosec.com%2Fimg%2Fhtb-cdsa.jpg&f=1&nofb=1&ipt=e7d059f2c9a39b39488f0d17c67b9f457afd8b6f57f28c299b75cafe047bd9f5"
+thumbnail: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fhtbpro.xyz%2Fcdsa.jpg&f=1&nofb=1&ipt=7dd5df2de42c22befd68a3ee36653afb410182d642e82f2f4c04cc8b3c9fd863"
 bookmark: true
 
 ---
@@ -42,11 +42,12 @@ Regarding the price, there are two components: **the training and the exam itsel
 1.  **Training (HTB Academy):** To be eligible for the exam, you must complete the entire "SOC Analyst" job-role path on the Hack The Box Academy. The most cost-effective option is the **Silver Annual subscription**, which costs **$490 per year**. This plan grants you access to all the necessary modules and includes **one exam voucher** (for the CDSA, CPTS, or CBBH). Monthly subscriptions are also available, but the annual plan is more economical in the long run.
 2.  **Exam (Voucher):** If you purchase the exam voucher separately, its price is **$210**.
 
-So, for the complete package (training + exam), the most common investment is $490.
+So, for the complete package (training + exam), the most common investment is $490 (Before new VIP update).
+
 
 #### **Preparation**
 
-Preparation is the key to everything, and there are no shortcuts. The only real path is to **complete the entire "SOC Analyst" job-role path on HTB Academy**. This path consists of 28 modules (this number may change) that cover everything from the fundamentals to advanced techniques.
+Preparation is the key to everything, and there are no shortcuts. The only real path is to **complete the entire "SOC Analyst" job-role path on HTB Academy**. This path consists of 28 modules (this number may change) that cover everything from the fundamentals to advanced techniques. It's worth noting that I was juggling my high school classes at the same time, so my preparation process naturally took more time to ensure I could thoroughly absorb all the material.
 
 My approach to preparation was as follows:
 
