@@ -6,7 +6,7 @@ tags:
     - [HTB]
     - [Blue Team]
     - [CDSA]
-thumbnail: "https://www.comptia.org/images/default-source/connect-blog-images/red-team-vs-blue-team-what-s-the-difference.jpg?sfvrsn=3c57706_2"
+thumbnail: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.shyosec.com%2Fimg%2Fhtb-cdsa.jpg&f=1&nofb=1&ipt=e7d059f2c9a39b39488f0d17c67b9f457afd8b6f57f28c299b75cafe047bd9f5"
 bookmark: true
 
 ---
@@ -53,7 +53,7 @@ My approach to preparation was as follows:
 -   **Focused Module Completion:** I didn't just read and click "next." I carefully studied each module and did the hands-on exercises multiple times until I was certain I fully understood the concepts.
 -   **Note-Taking:** This is absolutely crucial. I used Obsidian for my notes. For every tool and technique, I wrote down key commands, SIEM queries, and processes. I created my own personal cheat sheet that proved invaluable during the exam.
 -   **Understanding the "Why":** It’s not enough to just know a command. I made an effort to understand _why_ I was using a specific Splunk query or _why_ I was looking at a particular log file. Understanding the attacker's perspective greatly helps in defense.
--   **Extra Practice:** Although the Academy is sufficient, I recommend completing a few machines on the main HTB platform and trying some of the Splunk BOTS (Boss of the SOC) scenarios available online. It builds confidence.
+-   **Extra Practice:** Although the Academy is sufficient, If you don't have experience you should do some HTB boxes before attepmting certification.
 
 #### **The Exam**
 
