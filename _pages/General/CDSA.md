@@ -15,37 +15,51 @@ bookmark: true
 
 ---
 
+### Certification at a Glance
+
+| Attribute | Value |
+|---|---|
+| **Certification Name** | HTB Certified Defensive Security Analyst (CDSA) |
+| **Provider** | Hack The Box |
+| **Focus Area** | Blue Team, SOC, DFIR |
+| **Exam Format** | 100% Practical, Hands-on |
+| **Duration** | 7 Days |
+| **Final Deliverable**| Professional Incident Report |
+
+---
+
 Hello everyone, and welcome to my first-ever blog post! The feeling is incredible, not just because I'm launching this blog, but because I have some exciting news to share – **I have officially passed the Hack The Box Certified Defensive Security Analyst (HTB CDSA) exam!**
 
 The journey was challenging but immensely rewarding. Through this article, I want to share my entire experience, from the moment I decided to pursue it, through the preparation, and all the way to the exam itself. I hope my story will be helpful to all of you who are considering the same path.
 
-#### **Overview**
+## 📜 Overview of the HTB CDSA
 
 The HTB CDSA is not your typical multiple-choice certification. It is a completely practical, hands-on exam that places you in the role of a Security Analyst in a realistic scenario. Its goal is to test your skills in security analysis, Security Operations Center (SOC) procedures, and Incident Response.
 
 This certification is designed for those who want to validate their Blue Team skills. If you are interested in roles like SOC Analyst, Incident Responder, Threat Hunter, or Digital Forensics Analyst, then this is the right choice for you. It confirms that you possess intermediate-level technical competence and are capable not only of finding traces of an attack but also of writing a professional report about it.
 
-#### **What is the CDSA and What's the Pricing?**
+## 💰 Domains & Pricing
 
 The HTB CDSA teaches and tests you in the following domains:
 
-- **SIEM Operations** (Splunk and the ELK Stack)
-- **Log Analysis** from various sources
-- **Threat Hunting** (proactively searching for threats)
-- **Network Traffic Analysis** (Wireshark, Suricata/Zeek)
-- **Basic Malware Analysis**
-- **Digital Forensics and Incident Response (DFIR)**
-- **Professional Incident Report Writing**
+* **SIEM Operations** (Splunk and the ELK Stack)
+* **Log Analysis** from various sources
+* **Threat Hunting** (proactively searching for threats)
+* **Network Traffic Analysis** (Wireshark, Suricata/Zeek)
+* **Basic Malware Analysis**
+* **Digital Forensics and Incident Response (DFIR)**
+* **Professional Incident Report Writing**
 
 Regarding the price, there are two components: **the training and the exam itself.**
 
-1.  **Training (HTB Academy):** To be eligible for the exam, you must complete the entire "SOC Analyst" job-role path on the Hack The Box Academy. The most cost-effective option is the **Silver Annual subscription**, which costs **$490 per year**. This plan grants you access to all the necessary modules and includes **one exam voucher** (for the CDSA, CPTS, or CBBH). Monthly subscriptions are also available, but the annual plan is more economical in the long run.
+1.  **Training (HTB Academy):** To be eligible for the exam, you must complete the entire "SOC Analyst" job-role path on the Hack The Box Academy. The most cost-effective option is the **Silver Annual subscription**, which costs **$490 per year**. This plan grants you access to all the necessary modules and includes **one exam voucher** (for the CDSA, CPTS, or CBBH).
 2.  **Exam (Voucher):** If you purchase the exam voucher separately, its price is **$210**.
 
 So, for the complete package (training + exam), the most common investment is $490 (Before new VIP update).
 
+---
 
-#### **Preparation**
+## 📚 My Preparation Strategy
 
 Preparation is the key to everything, and there are no shortcuts. The only real path is to **complete the entire "SOC Analyst" job-role path on HTB Academy**. This path consists of 28 modules (this number may change) that cover everything from the fundamentals to advanced techniques. It's worth noting that I was juggling my high school classes at the same time, so my preparation process naturally took more time to ensure I could thoroughly absorb all the material.
 
@@ -56,27 +70,23 @@ My approach to preparation was as follows:
 -   **Understanding the "Why":** It’s not enough to just know a command. I made an effort to understand _why_ I was using a specific Splunk query or _why_ I was looking at a particular log file. Understanding the attacker's perspective greatly helps in defense.
 -   **Extra Practice:** Although the Academy is sufficient, If you don't have experience you should do some HTB boxes before attepmting certification.
 
-#### **The Exam**
+---
 
-The exam itself lasts for **7 days**. When you begin, you are given VPN access and a "Letter of Engagement" that explains your task.
+## 💻 The 7-Day Exam Experience
 
-The format is as follows: You are placed in an environment with multiple machines, and your task is to investigate **two separate security incidents**. During your investigation, you will find evidence, analyze logs, network traffic, memory dumps, and files.
+The exam itself lasts for **7 days**. When you begin, you are given VPN access and a "Letter of Engagement" that explains your task. You are placed in an environment with multiple machines, and your task is to investigate **two separate security incidents**. During your investigation, you will find evidence, analyze logs, network traffic, memory dumps, and files.
 
 The key to passing isn't just the technical analysis. To pass, you must write and submit a **professional, detailed incident report**. This report must contain all your findings, evidence (screenshots), the attack timeline, the tools and SIEM queries you used, and recommendations for remediation. The report carries a massive portion of the final grade.
 
-#### **My Exam Experience**
-
 My 7-day exam felt like a real job as a SOC Analyst. Here’s a breakdown of how it went for me:
 
-On the very first day, I managed to solve 16 out of 20 flags for the first incident. By the second day, I had already met the minimum passing requirement (16/20 flags total) and started writing the report for Incident 1 without waiting.
+On the very first day, I managed to solve 16 out of 20 flags for the first incident. By the second day, I had already met the minimum passing requirement and started writing the report for Incident 1. On the third day, I began working on Incident 2, which was more difficult. After spending two days on that incident, I started writing the report for it.
 
-On the third day, I began working on Incident 2, which was more difficult and required more independent investigation than the first one. In Incident 1, you have a clearer idea of what to look for and in what order, but Incident 2 was a different beast. After spending two days on that incident, I started writing the report for it once all the pieces of the puzzle began to fit together.
+The final day was dedicated solely to finishing and polishing the report. Throughout the entire process, I took meticulous notes and screenshots. I spent about 5 hours of real, productive work each day. Thanks to my previous experience, I didn't find the certification overly difficult, but my thorough preparation on the HTB Academy was also a major contributing factor to that.
 
-In the meantime, I went back and finished Incident 1 completely, ending with 18 out of 20 flags. The final day was dedicated solely to finishing and polishing the report. I made sure to accompany every finding with screenshots.
+---
 
-Throughout the entire process, I took meticulous notes. This turned out to be a very smart decision, as it allowed me to easily verify everything and ensure I didn't forget any details while writing the report. In terms of time commitment, I spent about 5 hours of real, productive work each day. Thanks to my previous experience, I didn't find the certification overly difficult, but my thorough preparation on the HTB Academy was also a major contributing factor to that.
-
-#### **Tips**
+## ✨ Key Tips for Success
 
 If you are planning to take the HTB CDSA, here are a few tips from my firsthand experience:
 
