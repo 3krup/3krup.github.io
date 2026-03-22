@@ -49,7 +49,7 @@ The primary technical hurdle is that the packets are not captured in chronologic
 ## 2. Beeper's Revenge
 **Category:** Forensics
 **Difficulty:** Medium
-**Points:** 200
+**Points:** 50
 
 ### Description
 >   System administrators are reporting mysterious audible beep signals coming from the Admin workstation, while File Explorer is showing signs of instability.
@@ -118,7 +118,7 @@ Decrypted Shard 3: `n0_t4l35}`
 
 ## 3. Vault 126
 **Category:** Forensics
-**Points:** 300
+**Points:** 432
 **Difficulty:** Medium
 
 ### Description
