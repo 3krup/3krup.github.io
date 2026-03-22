@@ -5,7 +5,6 @@ tags:
     - [CTF]
     - [Writeup]
     - [Security]
-thumbnail: "/assets/img/thumbnail/empty.jpg"
 bookmark: false
 ---
 
