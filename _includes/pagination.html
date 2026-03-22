@@ -13,7 +13,7 @@
     {%- for sub_page in list_pages -%}
         {%- assign page_url = page.url | remove: 'index.html' -%}
         {% if sub_page.url contains page_url %}
-        {% unless sub_page.url contains "index.html" %}
+        {% unless sub_page.url contains "index.html" or sub_page.hidden %}
             {%- assign post_counts = post_counts | plus:1 -%}
             <li class="paginated-item">
                 <div id="article_content">

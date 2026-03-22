@@ -8,7 +8,10 @@ svg { fill:#aaa; }
 
 #stars, #loading { background:#1E1E1F; }
 
-#loading p { color:cadetblue; }
+#loading .loader {
+  border-color: rgba(255, 255, 255, 0.1);
+  border-top-color: $color-darkorange;
+}
 
 .sidebar-left { background-color:#313132; }
 
@@ -82,8 +85,9 @@ main {
   }
 
   blockquote {
-    background:#1E1E1F;
-    border-left:4px solid #464647;
+    background:rgba(255, 255, 255, 0.05);
+    border-left:4px solid $color-darkorange;
+    color: #cbd5e0;
   }
 
   table { background-color:#464647; }
@@ -139,7 +143,7 @@ main {
 
   ul {
     border-bottom:2px solid #464647;
-    box-shadow:0px 4px 8px 0 #1E1E1F;
+    box-shadow:0 4px 8px 0 #1E1E1F;
 
     svg { background-color:#ccc; }
 

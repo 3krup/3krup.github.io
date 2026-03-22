@@ -25,6 +25,15 @@
 
             {% if page.thumbnail %}
                 <style>
+                    .post-header {
+                        position: relative;
+                    }
+                    .transbox {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+
                     {%- assign check_localasset = page.thumbnail | split:'/' -%}
                     {% if check_localasset[0] == '' %}
                         .thumbnail {

@@ -45,18 +45,12 @@
 }
 
 .transbox {
-  position:absolute;
-  top:50%;
-  left:50%;
-  -webkit-transform:translate(-50%, -50%);
-  -moz-transform:translate(-50%, -50%);
-  transform:translate(-50%, -50%);
+  position:relative;
   width:100%;
   margin:auto;
-  padding:1rem 0;
+  padding:2rem 1rem;
   text-align:center;
-  backdrop-filter:blur(4px);
-  background-color:rgba(255, 255, 255, 0.5);
+  background-color:transparent;
 }
 
 .post-title {
@@ -313,18 +307,25 @@ main {
   }
 
   blockquote {
-    background:$color-beige;
-    border-left:4px solid burlywood;
+    background:rgba($color-beige, 0.5);
+    border-left:4px solid $color-darkorange;
     border-radius:4px;
-    box-shadow:0 1px 2px rgba(0,0,0,.15), 0 3px 10px rgba(0,0,0,.1);
-    padding-left:1rem;
-    padding-right:1rem;
-    margin:8px auto;
-    word-break:break-all;
+    box-shadow:0 1px 3px rgba(0,0,0,.15), 0 4px 6px rgba(0,0,0,.05);
+    padding:1rem 1.5rem;
+    margin:1.5rem 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: lighten($color-wenge, 10%);
 
     p {
       margin:0;
-      padding:1rem 0;
+      padding:0;
+    }
+
+    // Support for GFM alerts if rendered with proper classes or simple emphasis
+    &.alert-note {
+      border-left-color: $color-aqua;
+      background: rgba($color-aqua, 0.1);
     }
   }
 

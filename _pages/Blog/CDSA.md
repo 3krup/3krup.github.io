@@ -11,7 +11,7 @@ bookmark: true
 
 ---
 
-> **Summary:** This post details my personal journey of passing the practical HTB Certified Defensive Security Analyst (CDSA) exam. It covers my preparation strategy, a breakdown of the 7-day exam experience, and essential tips for anyone aspiring to earn this blue team certification.
+> **Summary:** This post details my personal journey of passing the practical HTB Certified Defensive Security Analyst (CDSA) exam. It covers my preparation strategy, a breakdown of the 7-day exam experience,   and essential tips for anyone aspiring to earn this blue team certification.
 
 ---
 
@@ -32,13 +32,13 @@ Hello everyone, and welcome to my first-ever blog post! The feeling is incredibl
 
 The journey was challenging but immensely rewarding. Through this article, I want to share my entire experience, from the moment I decided to pursue it, through the preparation, and all the way to the exam itself. I hope my story will be helpful to all of you who are considering the same path.
 
-## 📜 Overview of the HTB CDSA
+## Overview of the HTB CDSA
 
 The HTB CDSA is not your typical multiple-choice certification. It is a completely practical, hands-on exam that places you in the role of a Security Analyst in a realistic scenario. Its goal is to test your skills in security analysis, Security Operations Center (SOC) procedures, and Incident Response.
 
 This certification is designed for those who want to validate their Blue Team skills. If you are interested in roles like SOC Analyst, Incident Responder, Threat Hunter, or Digital Forensics Analyst, then this is the right choice for you. It confirms that you possess intermediate-level technical competence and are capable not only of finding traces of an attack but also of writing a professional report about it.
 
-## 💰 Domains & Pricing
+## Domains & Pricing
 
 The HTB CDSA teaches and tests you in the following domains:
 
@@ -59,7 +59,7 @@ So, for the complete package (training + exam), the most common investment is $4
 
 ---
 
-## 📚 My Preparation Strategy
+## My Preparation Strategy
 
 Preparation is the key to everything, and there are no shortcuts. The only real path is to **complete the entire "SOC Analyst" job-role path on HTB Academy**. This path consists of 28 modules (this number may change) that cover everything from the fundamentals to advanced techniques. It's worth noting that I was juggling my high school classes at the same time, so my preparation process naturally took more time to ensure I could thoroughly absorb all the material.
 
@@ -72,7 +72,7 @@ My approach to preparation was as follows:
 
 ---
 
-## 💻 The 7-Day Exam Experience
+## The 7-Day Exam Experience
 
 The exam itself lasts for **7 days**. When you begin, you are given VPN access and a "Letter of Engagement" that explains your task. You are placed in an environment with multiple machines, and your task is to investigate **two separate security incidents**. During your investigation, you will find evidence, analyze logs, network traffic, memory dumps, and files.
 
@@ -86,7 +86,7 @@ The final day was dedicated solely to finishing and polishing the report. Throug
 
 ---
 
-## ✨ Key Tips for Success
+## Key Tips for Success
 
 If you are planning to take the HTB CDSA, here are a few tips from my firsthand experience:
 

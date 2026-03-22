@@ -1,22 +1,24 @@
 document.addEventListener('DOMContentLoaded', function(){
-    // typing effect
-    var blank_msgs = document.querySelectorAll('p');
-    var typing_speed = 50;
+    // Number counting animation
+    const errorCode = document.querySelector('.error-code');
+    if(errorCode) {
+        const end = 404;
+        const duration = 2000;
+        const start = 0;
+        let startTime = null;
 
-    blank_msgs.forEach((item, index) => {
-        var raw_text = item.innerText;
-        var i = 0;
+        function animate(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
 
-        item.innerHTML = "";
+            errorCode.textContent = Math.floor(start + (end - start) * ease);
 
-        function typeWriter() {
-            if (i < raw_text.length) {
-                item.innerHTML += raw_text.charAt(i);
-                i++;
-                setTimeout(typeWriter, typing_speed);
+            if (progress < 1) {
+                requestAnimationFrame(animate);
             }
         }
 
-        typeWriter();
-    });
+        requestAnimationFrame(animate);
+    }
 });

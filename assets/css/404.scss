@@ -1,47 +1,92 @@
 ---
 ---
 
+@import "vars";
+
 body {
-  margin:0;
-  background:
-    repeating-linear-gradient(
-    to right, transparent, 
-    transparent 100px, 
-    white 100px, 
-    white 112px
-    ),
-    repeating-linear-gradient(
-    to bottom, transparent, 
-    transparent 100px, 
-    white 100px, 
-    white 112px
-    ),
-    linear-gradient(45deg, pink, skyblue);
+  margin: 0;
+  padding: 0;
+  background-color: $color-beige;
+  font-family: 'Nunito Sans', sans-serif;
+  color: $color-wenge;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.blank-page {
-  display:table-cell;
-  z-index:0;
-  background:#fff;
-  margin:1rem auto;
-  width:100vw;
-  height:45vh;
-  vertical-align:middle;
+.error-container {
+  text-align: center;
+  padding: 2rem;
+  animation: fadeIn 0.8s ease-out;
 
-  .go-home {
-    text-decoration:none;
-    margin-left:5vw;
-    font-size:1.25rem;
+  .error-code {
+    font-size: 10rem;
+    font-weight: 700;
+    color: $color-darkorange;
+    line-height: 1;
+    margin-bottom: 1rem;
+    font-family: 'Lato', sans-serif;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
   }
 
-  .not-found-msg { text-align:center; }
+  .error-message {
+    h1 {
+      font-size: 2.5rem;
+      margin: 0 0 1rem;
+      color: $color-darkbrown;
+    }
 
-  .sour-face {
-    margin:3rem auto;
-    font-size:5rem;
-    line-height:1;
-    letter-spacing:-1px;
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: lighten($color-wenge, 10%);
+    }
+
+    .home-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: $color-darkorange;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+      &:hover {
+        background-color: darken($color-darkorange, 10%);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
   }
 }
 
-.container { display:none; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a202c; // Dark theme bg
+    color: #e2e8f0;
+  }
+
+  .error-container {
+    .error-code {
+      text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+    }
+
+    .error-message {
+      h1 { color: #f7fafc; }
+      p { color: #cbd5e0; }
+    }
+  }
+}
+

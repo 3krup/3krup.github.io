@@ -2,6 +2,8 @@
 ---
 $baseurl: "{{ site.baseurl }}";
 
+@import 'vars';
+
 html, body {
   margin:0;
   padding:0;
@@ -14,7 +16,7 @@ html, body {
 }
 
 a { text-decoration:none; }
-a, span, p, h1, h2, h3, i { color:#3A241A; }
+a, span, p, h1, h2, h3, i { color:$color-darkbrown; }
 a, span, p { font-family:'Lucida Sans', sans-serif; }
 h1, h2, h3, mark {
   margin:0;
@@ -25,7 +27,7 @@ mark { background-color:transparent; }
 svg {
   width:16px;
   aspect-ratio:1.0;
-  fill:#3A241A;
+  fill:$color-darkbrown;
   display:block;
   margin:auto;
 }
@@ -50,7 +52,6 @@ input::-webkit-search-results-decoration{
 	display:none;
 }
 
-@import 'vars';
 @import 'layout';
 
 :root{
