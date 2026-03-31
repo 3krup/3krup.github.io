@@ -42,6 +42,21 @@
   background-size:cover;
   background-position:center center;
   box-shadow:0 16px 16px 8px rgba(31, 35, 46, .15);
+  overflow:hidden;
+
+  // Dark gradient keeps bright images while improving foreground text contrast.
+  &::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+      180deg,
+      rgba(7, 10, 18, 0.16) 0%,
+      rgba(7, 10, 18, 0.46) 58%,
+      rgba(7, 10, 18, 0.74) 100%
+    );
+    pointer-events:none;
+  }
 }
 
 .transbox {
@@ -51,6 +66,22 @@
   padding:2rem 1rem;
   text-align:center;
   background-color:transparent;
+  z-index:1;
+}
+
+// Apply stronger readability only when a thumbnail exists behind the header text.
+.post-header .thumbnail + .transbox {
+  background-color:rgba(10, 14, 24, 0.28);
+  -webkit-backdrop-filter:blur(2px);
+  backdrop-filter:blur(2px);
+}
+
+.post-header .thumbnail + .transbox .post-title,
+.post-header .thumbnail + .transbox .post-info span,
+.post-header .thumbnail + .transbox .info-box svg {
+  color:#f4f7ff;
+  fill:#f4f7ff;
+  text-shadow:0 2px 10px rgba(0, 0, 0, 0.72);
 }
 
 .post-title {
@@ -123,6 +154,7 @@
     border-style:solid;
     border-width:12px 12px 12px 0;
   }
+
   &:after {
     content:"";
     position:absolute;
@@ -136,6 +168,7 @@
     -webkit-box-shadow:-1px -1px 2px rgba(0,0,0,0.4);
     box-shadow:-1px -1px 2px rgba(0,0,0,0.4);
   }
+
   &:hover {
     animation:pulse 1s infinite;
     transition:0.3s;
@@ -146,17 +179,21 @@
     70% { transform:scale(0.9); }
     100% { transform:scale(1); }
   }
+
+  // Close .tag before theme variants.
 }
 
 .theme-0 {
   background:hsl(50, 65%, 50%);
-  &::before { border-color:transparent hsl(50, 65%, 50%) transparent transparent; } 
+  &::before { border-color:transparent hsl(50, 65%, 50%) transparent transparent; }
 }
-.theme-1 { 
+
+.theme-1 {
   background:hsl(360, 65%, 50%);
   &::before { border-color:transparent hsl(360, 65%, 50%) transparent transparent; }
 }
-.theme-2 { 
+
+.theme-2 {
   background:hsl(200, 65%, 50%);
   &::before { border-color:transparent hsl(200, 65%, 50%) transparent transparent; }
 }
@@ -209,14 +246,15 @@ main {
     }
   }
 
-  p, ul, table, div { margin-bottom:3rem; }
+  // Keep markdown sections readable without large empty gaps.
+  p, ul, table, div { margin-bottom:1.4rem; }
 
   p + div,
   p + pre,
   p + blockquote,
   div + div,
-  div + blockquote { 
-    margin-top:-2rem; 
+  div + blockquote {
+    margin-top:-0.6rem;
   }
 
   ul { padding-left:2rem; }

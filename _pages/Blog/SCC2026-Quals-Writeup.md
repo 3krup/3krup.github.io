@@ -5,8 +5,7 @@ tags:
     - [CTF]
     - [Writeup]
     - [Security]
-thumbnail: "/assets/img/thumbnail/empty.jpg"
-bookmark: false
+bookmark: true
 ---
 
 > **Summary:** This post provides a technical walkthrough of three forensics challenges I authored for the SCC 2026 Qualifiers. It covers the intended solutions for "The Silent Leak" (DNS exfiltration), "Beeper's Revenge" (COM hijacking), and "Vault 126" (App-Bound encryption).
