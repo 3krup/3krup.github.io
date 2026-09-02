@@ -5,6 +5,7 @@ tags:
     - [CTF]
     - [Writeup]
     - [Security]
+thumbnail: "https://sajberheroj.rs/wp-content/uploads/2022/02/main_sajberheroj--468x328.png"
 bookmark: true
 ---
 

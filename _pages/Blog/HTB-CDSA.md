@@ -6,7 +6,7 @@ tags:
     - [HTB]
     - [Blue Team]
     - [CDSA]
-thumbnail: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fhtbpro.xyz%2Fcdsa.jpg&f=1&nofb=1&ipt=7dd5df2de42c22befd68a3ee36653afb410182d642e82f2f4c04cc8b3c9fd863"
+thumbnail: "https://www.hackthebox.com/storage/blog/ceWOP6W5gJqYVSDRjS1h88NRVOu7KKJb.jpg"
 bookmark: true
 
 ---
