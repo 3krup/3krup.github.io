@@ -7,3 +7,4 @@ _site/
 *.gem
 Gemfile.lock
 vendor
+bin/serve
