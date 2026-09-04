@@ -64,8 +64,6 @@ I kept the test setup narrow:
 
 Everything below assumes that setup. I would not ship this as an endpoint detector.
 
-I will add the detector source code soon. I am cleaning the repository and test files before publishing it.
-
 ---
 
 ## 2. The Windows Pieces I Needed to Understand
@@ -164,11 +162,7 @@ I also stopped the process on `RtlAddVectoredExceptionHandler` in WinDbg to conf
 
 ### 3.4 Breakpoints and stepping
 
-To create a software breakpoint, GhostDebug saves the original byte, changes the page protection, writes `0xCC`, and restores the old protection.
-
-When execution reaches that byte, the handler restores the original instruction and sets the trap flag. The next instruction produces a single-step exception, which lets the handler put the breakpoint back.
-
-That led to the first detector check: while a breakpoint is armed, the executable code in memory differs from the file on disk.
+GhostDebug implements the lifecycle described in Section 2.3: it saves the original byte, changes the page protection, writes `0xCC`, and restores the old protection. While that breakpoint is armed, the executable code in memory differs from the file on disk, which became the first detector check.
 
 ---
 
@@ -189,20 +183,16 @@ GhostDebug does not use the APIs that normally create a debug port or debug obje
 
 ## 5. What Can I Realistically Detect?
 
-My first detector design was too optimistic. A VEH flag, a new DLL, or an executable allocation can all come from normal software. Even patched code is not unique to a debugger.
-
-My detector therefore reports several observations and combines them. It also has two different levels of visibility:
+My first detector design treated individual observations too strongly. A VEH flag, new DLL, executable allocation, or patched byte can all come from legitimate software, so the detector combines them. It has two levels of visibility:
 
 - **Scan mode:** inspect what exists right now.
 - **Watch mode:** take a baseline first, then report what changes.
 
-The baseline is what makes watch mode useful. A scan shows what exists; a baseline shows what appeared during the test.
+A scan shows what exists; a baseline shows what appeared during the test.
 
 ### 5.1 Keep the classic checks as a control
 
-I still collect `CheckRemoteDebuggerPresent`, `ProcessDebugPort`, `ProcessDebugObjectHandle`, and `ProcessDebugFlags`.
-
-I did not expect them to find GhostDebug. They provide a control and make comparison with WinDbg or x64dbg straightforward.
+I still collect `CheckRemoteDebuggerPresent`, `ProcessDebugPort`, `ProcessDebugObjectHandle`, and `ProcessDebugFlags` as controls and for comparison with WinDbg or x64dbg.
 
 If the process cannot be opened or its architecture is unsupported, the tool stops instead of printing a clean result. “I could not read it” and “I read it and found nothing” are not the same outcome.
 
@@ -249,8 +239,6 @@ A completely raw comparison would produce false differences because the Windows 
 Ignoring those ranges removes two common sources of expected differences. It does not cover every legitimate loader or runtime modification, and it assumes the file at the module path is the same image that was originally loaded.
 
 I call the results **INT3 candidates**, not confirmed breakpoints. My code does not fully disassemble the instruction stream, and hotpatching or security products could also modify executable code. A candidate that appears after the baseline at the same time as VEH becomes active is much more convincing than a candidate from a single scan.
-
-There is also a timing problem: GhostDebug restores the original byte briefly while stepping over a breakpoint. A scan taken during that small window can miss it.
 
 ### 5.6 Enumerate and decode VEH callbacks
 
@@ -401,7 +389,7 @@ struct Snapshot {
 
 `Some(false)` means the check worked and returned false. `None` means it failed or was unsupported. The JSON output uses `null` for the same distinction.
 
-With this representation, a failed collector cannot look like a negative result. Per-module comparison errors remain warnings, so a report containing one may still be incomplete.
+With this representation, a failed collector cannot look like a negative result.
 
 ### 6.3 Reading `ProcessUsingVEH`
 
@@ -421,8 +409,6 @@ fn query_process_using_veh(process: HANDLE) -> Result<bool, String> {
 }
 ```
 
-This flag is easy to read and weak as evidence. Plenty of ordinary programs set it.
-
 ### 6.4 Walking the private VEH list
 
 The callback enumerator does four things:
@@ -432,9 +418,7 @@ The callback enumerator does four things:
 3. walks and validates the remote doubly linked list;
 4. decodes each protected callback and maps it to its owning memory.
 
-I dynamically resolve `RtlDecodeRemotePointer` from ntdll. KernelBase and Kernel32 are fallback locations. Dynamic resolution matters because a direct Rust/LLVM-MinGW import initially produced an executable that Windows could not even start.
-
-The code reads the complete list twice. If a registration or removal changes it between reads, the detector reports an unstable snapshot instead of accepting either copy.
+I dynamically resolve `RtlDecodeRemotePointer` from ntdll, with KernelBase and Kernel32 as fallback locations. The import failure that forced dynamic resolution is covered below; the double-read validation rejects a snapshot if registration or removal changes the list during collection.
 
 ### 6.5 The part that kept breaking
 
@@ -476,13 +460,13 @@ The result list is capped so a strange or hostile target cannot make the detecto
 
 ### 6.7 Scan mode and watch mode
 
-Scan mode takes one snapshot:
+The command line exposes the scan and watch modes described in Section 5. Scan mode takes one snapshot:
 
 ```powershell
 .\veh-detector.exe scan --pid 4242 --json scan.json
 ```
 
-Watch mode takes its first snapshot as the baseline and then compares later samples with it:
+Watch mode takes its first snapshot as the baseline and compares later samples with it:
 
 ```powershell
 .\veh-detector.exe watch --pid 4242 --interval-ms 1000
@@ -509,23 +493,7 @@ The detector has to start first because its opening sample becomes the baseline.
 
 For a false-positive control, I wrote `benign-veh.exe`. It prints its PID, waits for Enter, registers a callback that only returns `EXCEPTION_CONTINUE_SEARCH`, then waits again before removing it. Figure 6 comes from separate scans before and after registration. Watch mode gives the registration a suspicious label because it saw a new callback appear, even though the program does no debugging.
 
-The tests completed so far are:
-
-| Test | Result |
-|---|---|
-| Clean target before GhostDebug | No indicators observed |
-| GhostDebug attached after the baseline | High-confidence transition |
-| `CheckRemoteDebuggerPresent`, `ProcessDebugPort`, `ProcessDebugObjectHandle`, and `ProcessDebugFlags` with GhostDebug alone | All indicated no conventional debugger |
-| VEH callback enumeration | One callback decoded successfully |
-| Callback ownership | Callback mapped into the newly loaded debugger DLL |
-| Private executable memory | One new 4 KiB executable private region appeared |
-| Active `INT3` comparison during the initial watch capture | No candidate appeared |
-| Targeted scan with an armed breakpoint | One candidate found at `TestTarget.exe+0x1460` |
-| Scan after clearing the breakpoint | Candidate disappeared and the verdict dropped to suspicious |
-| Benign executable before VEH registration | No indicators observed |
-| Same executable after benign VEH registration | Inconclusive; one `MEM_IMAGE` callback and no stronger evidence |
-
-Still on my test list: a renamed GhostDebug build, deliberately broken collection paths, and more Windows builds.
+Section 8 reports the results. Still on my test list are a renamed GhostDebug build, deliberately broken collection paths, and more Windows builds.
 
 ---
 
@@ -584,7 +552,7 @@ After I cleared the breakpoint with GhostDebug's `cl` command, the next scan fou
 
 *Figure 5: Clearing the breakpoint restores the original byte. The remaining VEH callback and private executable region still produce a suspicious result, but the `INT3` evidence is gone.*
 
-The benign program gave me a useful control. Before registration, the scan was clean. After registration, it found `ProcessUsingVEH` and one callback inside the existing executable, with no `INT3` candidates or private executable regions. A standalone scan labels that combination inconclusive.
+The benign program gave me a useful control. Before registration, the scan was clean. After registration, it found `ProcessUsingVEH` and one `MEM_IMAGE` callback inside the existing executable, with no `INT3` candidates or private executable regions. A standalone scan labels that combination inconclusive.
 
 ![Detector results before and after a benign executable registers one vectored exception handler](/assets/img/veh-detection/benign-veh.webp)
 
@@ -596,17 +564,11 @@ I then ran the same program under watch mode. The baseline had no callback. Afte
 
 *Figure 7: Watch mode catches the benign callback appearing after the baseline. The suspicious label comes from the change, not from what the handler does.*
 
-The GhostDebug run is high confidence, not a verdict on intent. Legitimate software can also load a DLL and register VEH. What the baseline adds is timing: I can show which pieces appeared together and the polling interval in which they appeared.
-
 ---
 
 ## 9. False Positives
 
-VEH is a normal Windows feature. Browsers, crash handlers, runtimes, overlays, accessibility software, anti-cheat products, EDR agents, and instrumentation tools may all use it.
-
-Private executable memory is not automatically malicious either, and an executable byte that differs from disk is not automatically a debugger breakpoint.
-
-I deliberately avoid these shortcuts:
+The verdict ranks correlated evidence, not intent. VEH is used by browsers, crash handlers, runtimes, overlays, accessibility software, anti-cheat products, EDR agents, and instrumentation tools. Private executable memory and modified executable bytes also have legitimate uses. The detector therefore avoids these shortcuts:
 
 - treating `ProcessUsingVEH` as proof;
 - treating every `0xCC` byte as a breakpoint;
@@ -614,7 +576,7 @@ I deliberately avoid these shortcuts:
 - trusting a filename as an identity;
 - turning a failed read into a negative result.
 
-A baseline does not eliminate false positives, but it gives the changes an order and a time window.
+Watch mode adds an order and time window to those observations, but does not eliminate false positives.
 
 ---
 
@@ -622,13 +584,13 @@ A baseline does not eliminate false positives, but it gives the changes an order
 
 ### 10.1 Private callback-list internals
 
-Callback enumeration works on my Windows 11 25H2 build, but it depends on private ntdll code and structure layouts. A Windows update could change the wrapper, list layout, or node offset. The validation should reject an unfamiliar layout and return unknown, but there is no stable API contract here.
+Because callback enumeration depends on private ntdll code and structure layouts, a Windows update could change the wrapper, list layout, or node offset. The validation should reject an unfamiliar layout and return unknown, but there is no stable API contract here.
 
 Remote pointer decoding also requires `PROCESS_VM_WRITE` access to the target. A protected process or restrictive security descriptor can deny that access even when basic inspection succeeds.
 
 ### 10.2 No baseline means less confidence
 
-Starting the detector after attachment loses the timeline. It can still report the current VEH state, private executable memory, and active `INT3` candidates, but the result is a snapshot for triage.
+Starting after attachment loses the timeline and leaves only a triage snapshot of the current VEH state, private executable memory, and active `INT3` candidates.
 
 ### 10.3 Manual mapping
 
@@ -656,18 +618,13 @@ A user-mode scanner cannot reliably inspect every protected process or defend it
 
 ## 11. What the Test Showed
 
-GhostDebug does exactly what its design promises: it avoids the state created by the normal Windows debugging API. `IsDebuggerPresent`, the debug port, and the debug object all stay clean.
+GhostDebug kept `IsDebuggerPresent`, the debug port, and the debug object clean, but it still changed the target by loading a DLL, registering a VEH callback, leaving an executable private allocation, and replacing an instruction byte with `0xCC`. Correlating those changes made the attachment visible without treating any single observation as proof.
 
-It still has to change the target. In my test, that meant loading a DLL, registering a VEH callback, leaving an executable private allocation behind, and replacing an instruction byte with `0xCC`. None of those is unique to a debugger. Seeing several of them appear together is the useful part.
-
-The brittle part is callback enumeration. It gave me the best evidence in the test, but it also tied the detector to undocumented ntdll behavior. That tradeoff is acceptable for this experiment and would need much more version testing in a real tool.
-
-The result is a detector that explains what it saw and admits when collection failed. It answers the question I started with, while leaving plenty of work for a more general detector.
+Callback enumeration provided the strongest evidence and the greatest fragility because it relies on undocumented ntdll behavior. That tradeoff is acceptable for this experiment, but a production detector would need broader Windows-version testing and finer collection-completeness tracking.
 
 ---
 
 ## Source Material
 
-The detector source code will be added soon. I am cleaning the repository and packaging the test targets before I publish it.
-
+- [VEH Debugger Detector source code](https://github.com/3krup/veh-detector)
 - [GhostDebug](https://github.com/VollRagm/ghostdebug)
