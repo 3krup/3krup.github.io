@@ -1,6 +1,6 @@
 ---
 title: "Undetected Is Not Invisible: Looking for VEH Debuggers with Rust"
-date: "2026-09-03"
+date: "2026-09-04"
 tags:
     - [Windows]
     - [Rust]
