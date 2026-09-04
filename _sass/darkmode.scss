@@ -71,7 +71,7 @@ main {
   a { 
     color:dodgerblue; 
 
-    &::before {
+    &:hover {
       color:mediumseagreen;
       text-decoration-color:mediumseagreen;
     }

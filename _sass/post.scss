@@ -228,21 +228,15 @@ main {
 
   a {
     color:dodgerblue;
-    text-decoration:none;
+    text-decoration-line:underline;
+    text-decoration-style:wavy;
+    text-decoration-color:transparent;
+    text-underline-offset:4px;
+    transition:color .2s ease, text-decoration-color .2s ease;
 
-    &::before {
-      position:absolute;
-      content:attr(data-content);
+    &:hover {
       color:midnightblue;
-      text-decoration:underline;
-      text-decoration-style:wavy;
-      text-underline-offset:4px;
       text-decoration-color:midnightblue;
-      clip-path:polygon(0 0, 0 0, 0% 100%, 0 100%);
-      transition:clip-path .25s;
-    }
-    &:hover::before {
-      clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
   }
 

@@ -71,13 +71,6 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     }, 200);
 
-    // link (for hover effect)
-    var links = innerContent.querySelectorAll('a:not(.related-item a)');
-
-    links.forEach((link) => {
-        link.setAttribute('data-content', link.innerText);
-    });
-
     // Tag EventListener
     const searchPage = document.querySelector("#search");
 
